@@ -2,13 +2,17 @@ package com.github.yamill.orientation;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
-import android.view.OrientationEventListener;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.util.Log;
+
+import android.view.OrientationEventListener;
+import android.hardware.SensorManager;
+import android.view.Display;
+import android.graphics.Point;
 
 import com.facebook.common.logging.FLog;
 import com.facebook.react.bridge.Arguments;
@@ -157,6 +161,17 @@ public class OrientationModule extends ReactContextBaseJavaModule implements Lif
         Point size = new Point();
         display.getSize(size);
         return size.x > size.y;
+    }
+
+    private boolean isDeviceOrientationLocked() {
+        final Activity activity = getCurrentActivity();
+        if (activity == null) {
+            return false;
+        }
+        return Settings.System.getInt(
+                activity.getContentResolver(),
+                Settings.System.ACCELEROMETER_ROTATION, 0
+        ) == 0;
     }
 
     @ReactMethod
