@@ -254,6 +254,7 @@ public class OrientationModule extends ReactContextBaseJavaModule implements Lif
 
     @Override
     public void onHostResume() {
+        mHostActive = true;
         final Activity activity = getCurrentActivity();
 
         if (activity == null) {
@@ -264,6 +265,7 @@ public class OrientationModule extends ReactContextBaseJavaModule implements Lif
     }
     @Override
     public void onHostPause() {
+        mHostActive = false;
         final Activity activity = getCurrentActivity();
         if (activity == null) return;
         try
@@ -277,6 +279,6 @@ public class OrientationModule extends ReactContextBaseJavaModule implements Lif
 
     @Override
     public void onHostDestroy() {
-
-        }
+        mHostActive = false;
     }
+}
