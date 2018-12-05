@@ -13,6 +13,7 @@ import android.view.OrientationEventListener;
 import android.hardware.SensorManager;
 import android.view.Display;
 import android.graphics.Point;
+import android.provider.Settings;
 
 import com.facebook.common.logging.FLog;
 import com.facebook.react.bridge.Arguments;
