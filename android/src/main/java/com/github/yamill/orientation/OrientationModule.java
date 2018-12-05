@@ -84,7 +84,7 @@ public class OrientationModule extends ReactContextBaseJavaModule implements Lif
                 SensorManager.SENSOR_DELAY_NORMAL) {
             @Override
             public void onOrientationChanged(int orientationValue) {
-                if (!mHostActive || isDeviceOrientationLocked() || !ctx.hasActiveCatalystInstance())
+                if (!mHostActive || !ctx.hasActiveCatalystInstance())
                     return;
 
                 mOrientationValue = orientationValue;
@@ -228,15 +228,7 @@ public class OrientationModule extends ReactContextBaseJavaModule implements Lif
     @Override
     public @Nullable Map<String, Object> getConstants() {
         HashMap<String, Object> constants = new HashMap<String, Object>();
-        int orientationInt = getReactApplicationContext().getResources().getConfiguration().orientation;
-
-        String orientation = this.getOrientationStringLocal(orientationInt);
-        if (orientation == "null") {
-            constants.put("initialOrientation", null);
-        } else {
-            constants.put("initialOrientation", orientation);
-        }
-
+        constants.put("initialOrientation", mOrientation);
         return constants;
     }
 
