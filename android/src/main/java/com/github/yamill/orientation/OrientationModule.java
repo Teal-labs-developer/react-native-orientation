@@ -179,6 +179,11 @@ public class OrientationModule extends ReactContextBaseJavaModule implements Lif
     public void getOrientation(Callback callback) {
         callback.invoke(null, mOrientation);
     }
+    
+    @ReactMethod
+    public void getSpecificOrientation(Callback callback){
+        callback.invoke(null, mSpecificOrientation);
+    }
 
     @ReactMethod
     public void lockToPortrait() {
